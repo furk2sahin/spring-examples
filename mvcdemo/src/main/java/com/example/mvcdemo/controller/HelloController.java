@@ -11,12 +11,12 @@ public class HelloController {
 
     @RequestMapping("/hello")
     @ResponseBody
-    public String hello(){
+    public String hello() {
         return "Hello Spring MVC";
     }
 
     @RequestMapping("/hellojsp")
-    public ModelAndView getMessage(){
+    public ModelAndView getMessage() {
         ModelAndView mav = new ModelAndView();
         Message message = new Message();
         message.setMessage("Hello Spring MVC -> JSP");

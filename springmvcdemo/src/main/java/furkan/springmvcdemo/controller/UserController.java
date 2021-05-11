@@ -19,35 +19,40 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/register")
-    public String registerPage(Model model){
+    public String registerPage(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String saveRegisterPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
+    public String saveRegisterPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         model.addAttribute("user", user);
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "register";
-        } else{
+        } else {
             userService.saveUser(user);
         }
         return "index";
     }
 
     @RequestMapping("/")
-    public String login(){
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping("/login")
+    public String loginPage() {
         return "login";
     }
 
     @RequestMapping("/secure")
-    public String secure(){
+    public String secure() {
         return "secure";
     }
 }

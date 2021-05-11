@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Autowired
-    public  UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository){
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }

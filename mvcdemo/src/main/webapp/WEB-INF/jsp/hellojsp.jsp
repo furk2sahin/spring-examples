@@ -9,6 +9,6 @@
     <title>Document</title>
 </head>
 <body>
-    Message: ${message}
+Message: ${message}
 </body>
 </html>
