@@ -8,7 +8,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Student {
-
     private final Integer studentId;
     private final String studentName;
 }
