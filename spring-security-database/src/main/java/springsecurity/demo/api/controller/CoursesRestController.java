@@ -3,7 +3,7 @@ package springsecurity.demo.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springsecurity.demo.business.abstracts.CourseService;
-import springsecurity.demo.entitites.Course;
+import springsecurity.demo.entitites.concretes.Course;
 
 import java.util.List;
 

@@ -1,10 +1,11 @@
-package springsecurity.demo.entitites;
+package springsecurity.demo.entitites.abstracts;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import springsecurity.demo.entitites.concretes.Role;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,8 +16,9 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "application_users")
-public class ApplicationUser implements UserDetails {
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

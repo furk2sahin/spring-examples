@@ -3,7 +3,7 @@ package springsecurity.demo.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springsecurity.demo.business.concretes.RoleManager;
-import springsecurity.demo.entitites.Role;
+import springsecurity.demo.entitites.concretes.Role;
 
 import java.util.List;
 

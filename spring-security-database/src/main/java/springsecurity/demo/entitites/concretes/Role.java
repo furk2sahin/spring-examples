@@ -1,4 +1,4 @@
-package springsecurity.demo.entitites;
+package springsecurity.demo.entitites.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

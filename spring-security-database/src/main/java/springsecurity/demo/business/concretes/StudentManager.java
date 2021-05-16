@@ -1,9 +1,11 @@
 package springsecurity.demo.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import springsecurity.demo.business.abstracts.StudentService;
-import springsecurity.demo.entitites.Student;
+import springsecurity.demo.entitites.concretes.Student;
 import springsecurity.demo.repository.StudentRepository;
 
 import java.util.List;
@@ -44,5 +46,10 @@ public class StudentManager implements StudentService {
     @Override
     public List<Student> getAll() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return studentRepository.findByUsername(username);
     }
 }

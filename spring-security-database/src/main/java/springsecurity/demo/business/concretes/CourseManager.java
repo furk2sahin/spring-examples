@@ -3,7 +3,7 @@ package springsecurity.demo.business.concretes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springsecurity.demo.business.abstracts.CourseService;
-import springsecurity.demo.entitites.Course;
+import springsecurity.demo.entitites.concretes.Course;
 import springsecurity.demo.repository.CourseRepository;
 
 import java.util.List;

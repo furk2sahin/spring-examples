@@ -1,25 +1,25 @@
-package springsecurity.demo.authEnums;
+package springsecurity.demo.authenums;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static springsecurity.demo.authEnums.ApplicationUserPermission.*;
+import static springsecurity.demo.authenums.UserPermission.*;
 
-public enum ApplicationUserRole {
+public enum UserRole {
 
-    STUDENT(new HashSet<>()),
-    ADMIN(new HashSet<>(Arrays.asList(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE))),
+    STUDENT(new HashSet<>(Arrays.asList(COURSE_BUY, COURSE_DELETE))),
+    ADMIN(new HashSet<>(Arrays.asList(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE, COURSE_BUY, COURSE_DELETE))),
     ADMINTRAINEE(new HashSet<>(Arrays.asList(COURSE_READ, STUDENT_READ)));
 
-    private final Set<ApplicationUserPermission> permissions;
+    private final Set<UserPermission> permissions;
 
-    ApplicationUserRole(Set<ApplicationUserPermission> permissions) {
+    UserRole(Set<UserPermission> permissions) {
         this.permissions = permissions;
     }
 
-    public Set<ApplicationUserPermission> getPermissions() {
+    public Set<UserPermission> getPermissions() {
         return permissions;
     }
 

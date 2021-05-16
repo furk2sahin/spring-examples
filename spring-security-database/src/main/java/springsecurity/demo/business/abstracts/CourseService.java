@@ -1,6 +1,6 @@
 package springsecurity.demo.business.abstracts;
 
-import springsecurity.demo.entitites.Course;
+import springsecurity.demo.entitites.concretes.Course;
 
 import java.util.List;
 

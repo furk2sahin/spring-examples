@@ -1,12 +1,12 @@
 package springsecurity.demo.util;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import springsecurity.demo.entitites.Role;
+import springsecurity.demo.entitites.concretes.Role;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static springsecurity.demo.authEnums.ApplicationUserRole.*;
+import static springsecurity.demo.authenums.UserRole.*;
 
 public class RoleParser {
 
@@ -19,6 +19,9 @@ public class RoleParser {
             } else if(role.toUpperCase().equals(ADMINTRAINEE.name())){
                 for(SimpleGrantedAuthority permission : ADMINTRAINEE.getAuthorities())
                     addAuthority(authorities, permission);
+            } else if(role.toUpperCase().equals(STUDENT.name())){
+                for(SimpleGrantedAuthority permission : STUDENT.getAuthorities())
+                    addAuthority(authorities, permission);
             }
         }
         return authorities;
@@ -27,6 +30,6 @@ public class RoleParser {
     public static void addAuthority(Set<Role> authorities, SimpleGrantedAuthority permission){
         Role roleToAdd = new Role();
         roleToAdd.setAuthority(permission.getAuthority());
-        authorities.add(roleToAdd);
+            authorities.add(roleToAdd);
     }
 }

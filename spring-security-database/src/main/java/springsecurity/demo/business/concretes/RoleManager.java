@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import springsecurity.demo.business.abstracts.RoleService;
-import springsecurity.demo.entitites.Role;
+import springsecurity.demo.entitites.concretes.Role;
 import springsecurity.demo.repository.RoleRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package springsecurity.demo.business.abstracts;
 
-import springsecurity.demo.entitites.Role;
+import springsecurity.demo.entitites.concretes.Role;
 
 import java.util.List;
 
