@@ -61,6 +61,4 @@ public class EmployeesRestController {
     public List<Employee> getAll(){
         return employeeManager.getAll();
     }
-
-
 }
