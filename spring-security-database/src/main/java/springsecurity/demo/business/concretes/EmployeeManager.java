@@ -1,8 +1,6 @@
 package springsecurity.demo.business.concretes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import springsecurity.demo.business.abstracts.EmployeeService;
 import springsecurity.demo.entitites.concretes.Employee;
@@ -19,11 +17,6 @@ public class EmployeeManager implements EmployeeService {
     @Autowired
     public EmployeeManager(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return employeeRepository.findByUsername(username);
     }
 
     @Override
@@ -45,12 +38,12 @@ public class EmployeeManager implements EmployeeService {
         employeeToUpdate.setEnabled(employee.isEnabled());
         employeeToUpdate.setUsername(employee.getUsername());
         employeeToUpdate.setPassword(employee.getPassword());
-        employeeToUpdate.setFullname(employee.getFullname());
         employeeToUpdate.setEmail(employee.getEmail());
         employeeToUpdate.setRole(employee.getRole());
         String[] role = employeeToUpdate.getRole().split(",");
         employeeToUpdate.setGrantedAuthorities(RoleParser.parse(role));
-        return employee;
+        System.out.println(employeeToUpdate.toString());
+        return employeeRepository.save(employeeToUpdate);
     }
 
     @Override

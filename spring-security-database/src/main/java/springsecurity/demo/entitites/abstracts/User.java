@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public abstract class User implements UserDetails {
 
     private boolean isEnabled;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "id", name = "user_id")
     private Set<Role> grantedAuthorities = new HashSet<>();
 

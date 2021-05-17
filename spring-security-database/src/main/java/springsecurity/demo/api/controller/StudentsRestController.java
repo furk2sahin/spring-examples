@@ -1,7 +1,9 @@
 package springsecurity.demo.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springsecurity.demo.business.concretes.StudentManager;
@@ -32,17 +34,20 @@ public class StudentsRestController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('student:write')")
     public void delete(@RequestParam("id") Long id){
         studentManager.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public Student update(@RequestParam("id") Long id, @RequestBody Student student){
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         return studentManager.update(id, student);
     }
 
     @PostMapping("/add-all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Student> addAll(@RequestBody List<Student> students){
         for(Student student : students){
             String[] roles = student.getRole().split(",");
@@ -53,12 +58,8 @@ public class StudentsRestController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public List<Student> getAll(){
         return studentManager.getAll();
-    }
-
-    @GetMapping("/get-by-username")
-    public UserDetails getStudentByUsername(@RequestParam("username") String username){
-        return studentManager.loadUserByUsername(username);
     }
 }

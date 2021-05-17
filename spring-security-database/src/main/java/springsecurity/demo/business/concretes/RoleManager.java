@@ -39,6 +39,6 @@ public class RoleManager implements RoleService {
     @Override
     public void deleteRolesByUserId(Long userId) {
         String sql = "Delete from roles where user_id = ?";
-        System.out.println(jdbcTemplate.update(sql, userId));
+        jdbcTemplate.update(sql, new Object[]{userId});
     }
 }

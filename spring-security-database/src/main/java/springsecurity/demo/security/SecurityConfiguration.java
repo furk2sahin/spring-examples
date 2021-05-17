@@ -3,7 +3,6 @@ package springsecurity.demo.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,12 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import springsecurity.demo.authenums.UserPermission;
-import springsecurity.demo.authenums.UserRole;
-import springsecurity.demo.business.abstracts.EmployeeService;
-
-import static springsecurity.demo.authenums.UserPermission.COURSE_READ;
-import static springsecurity.demo.authenums.UserRole.*;
+import springsecurity.demo.business.abstracts.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -24,12 +18,12 @@ import static springsecurity.demo.authenums.UserRole.*;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private PasswordEncoder passwordEncoder;
-    private EmployeeService employeeService;
+    private UserService userService;
 
     @Autowired
-    public SecurityConfiguration(PasswordEncoder passwordEncoder, EmployeeService employeeService) {
+    public SecurityConfiguration(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
-        this.employeeService = employeeService;
+        this.userService = userService;
     }
 
     @Override
@@ -37,10 +31,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/api/employee/add").permitAll()
-                //.antMatchers(HttpMethod.DELETE,"/api/employee").hasAuthority(COURSE_READ.getPermission())
+                .antMatchers("/api/employee/add").permitAll()
+                .antMatchers("/api/student/add").permitAll()
+                .antMatchers("/api/employee").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .httpBasic();
     }
 
     @Override
@@ -52,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(employeeService);
+        provider.setUserDetailsService(userService);
         return provider;
     }
 }

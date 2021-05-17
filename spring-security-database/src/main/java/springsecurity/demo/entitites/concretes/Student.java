@@ -24,6 +24,7 @@ public class Student extends User {
     @Column(nullable = false)
     private String studentNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
-    Set<Course> courses = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id", name = "student_id")
+    private Set<Course> courses = new HashSet<>();
 }

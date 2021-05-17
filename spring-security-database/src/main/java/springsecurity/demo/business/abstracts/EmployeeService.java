@@ -1,11 +1,10 @@
 package springsecurity.demo.business.abstracts;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import springsecurity.demo.entitites.concretes.Employee;
 
 import java.util.List;
 
-public interface EmployeeService extends UserDetailsService{
+public interface EmployeeService{
     Employee add(Employee add);
     void delete(Long id);
     Employee update(Long id, Employee update);

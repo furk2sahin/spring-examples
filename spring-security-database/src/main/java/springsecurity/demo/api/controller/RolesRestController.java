@@ -1,6 +1,7 @@
 package springsecurity.demo.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import springsecurity.demo.business.concretes.RoleManager;
 import springsecurity.demo.entitites.concretes.Role;
@@ -19,11 +20,13 @@ public class RolesRestController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<Role> getAll(){
         return roleManager.getAll();
     }
 
     @GetMapping("/get-by-user-id")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<Role> getRolesByUserId(@RequestParam("id") Long id){
         return roleManager.getRolesByUserId(id);
     }

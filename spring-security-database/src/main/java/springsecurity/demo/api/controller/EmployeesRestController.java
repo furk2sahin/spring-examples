@@ -2,7 +2,6 @@ package springsecurity.demo.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springsecurity.demo.business.concretes.EmployeeManager;
@@ -27,11 +26,6 @@ public class EmployeesRestController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/get-by-username")
-    public UserDetails getEmployeeByUsername(@RequestParam("username") String username){
-        return employeeManager.loadUserByUsername(username);
-    }
-
     @PostMapping("/add")
     public Employee add(@RequestBody Employee employee){
         String[] roles = employee.getRole().split(",");
@@ -41,7 +35,6 @@ public class EmployeesRestController {
     }
 
     @DeleteMapping
-   // @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRANIEE')")
     public void delete(@RequestParam("id") Long id){
         employeeManager.delete(id);
     }
@@ -64,6 +57,7 @@ public class EmployeesRestController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Employee> getAll(){
         return employeeManager.getAll();
     }

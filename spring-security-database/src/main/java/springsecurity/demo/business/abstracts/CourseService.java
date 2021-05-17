@@ -7,7 +7,8 @@ import java.util.List;
 public interface CourseService {
     Course getById(Long id);
     List<Course> getAll();
-    Course add(Course course);
+    Course add(Long studentId, Course course);
     Course update(Long id, Course course);
     void delete(Long id);
+    List<Course> findAllByStudentId(Long id);
 }
